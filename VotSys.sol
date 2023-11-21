@@ -38,5 +38,14 @@ function vote(VoteOption _vote) external hasNotVoted {
  function getVoteCount() external view returns (uint256, uint256) {
         return (votesOption1, votesOption2);
     }
+function resetVotes() external onlyOwner {
+        votesOption1 = 0;
+        votesOption2 = 0;
 
+        // Reset voter information
+        for (uint256 i = 0; i < voters.length; i++) {
+            voters[i].hasVoted = false;
+            voters[i].vote = VoteOption.None;
+        }
+    }
 }
