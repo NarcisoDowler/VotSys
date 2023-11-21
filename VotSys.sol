@@ -35,5 +35,8 @@ function vote(VoteOption _vote) external hasNotVoted {
 
         emit VoteCast(msg.sender, _vote);
     }
+ function getVoteCount() external view returns (uint256, uint256) {
+        return (votesOption1, votesOption2);
+    }
 
 }
