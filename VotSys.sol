@@ -21,6 +21,19 @@ contract DecentralizedVotingSystem is Ownable {
         require(!voters[msg.sender].hasVoted, "You have already voted");
         _;
     }
+function vote(VoteOption _vote) external hasNotVoted {
+        require(_vote == VoteOption.Option1 || _vote == VoteOption.Option2, "Invalid vote option");
 
+        voters[msg.sender].hasVoted = true;
+        voters[msg.sender].vote = _vote;
+
+        if (_vote == VoteOption.Option1) {
+            votesOption1++;
+        } else {
+            votesOption2++;
+        }
+
+        emit VoteCast(msg.sender, _vote);
+    }
 
 }
